@@ -8,7 +8,7 @@ export default function About() {
             <p>
                 This is the TodoList app v1.0.0.<br/>
                 It is part of a react crash course.
-                </p>
+            </p>
         </React.Fragment>
     )
 }
