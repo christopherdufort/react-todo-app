@@ -1,27 +1,29 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import { green } from 'ansi-colors';
 
 export class TodoItem extends Component {
 
     // Dynamic style
     getStyle = () => {
-        if(this.props.todo.completed){
-            return {
-                backgroundColor: 'lightgray',
-                textDecoration: 'line-through'
-            }
-        } else {
-            return {
-                backgroundColor: '#f4f4',
-                textDecoration: 'none'
-            }
+        return {
+            background: 'lightgray',
+            padding:'10px',
+            borderBottom: '1px black dotted',
+            textDecoration: this.props.todo.completed ? 'line-through' : 'none'
         }
     }
+
+
     render() {
+        // Destructuring ( pull variables out )
+        const { id, title } = this.props.todo;
         return (
             <div style={this.getStyle()}>
-                <p>{this.props.todo.title}</p>
+                <p>
+                    <input type="checkbox" onChange={this.props.markComplete.bind(this, id)}/>{' '} 
+                    {title}
+                    <button onClick ={this.props.deleteTodo.bind(this, id)} style={btnStyle}>X - DELETE</button>
+                </p>
             </div>
         )
     }
@@ -29,6 +31,16 @@ export class TodoItem extends Component {
 // PropTypes - Runtime type checking for React props
 TodoItem.propTypes = {
     todo: PropTypes.object.isRequired
+}
+
+const btnStyle = {
+    background: '#ff0000',
+    color: '#fff',
+    border: 'none',
+    padding: '5px 10px',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    float: 'right'
 }
 
 export default TodoItem
